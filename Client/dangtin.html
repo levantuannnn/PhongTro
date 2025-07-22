@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous" />
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="bg-body-tertiary">
+    <div class="dangtin_way container p-4 shadow rounded d-bolck bg-body-secondary">
+        <h4 class="mb-4">Thông tin bài đăng</h4>
+
+        <div class="form-group mb-3">
+            <label for="ngay_dang">Ngày đăng:</label>
+            <input type="date" id="ngay_dang" class="form-control">
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="ngay_het_han">Ngày hết hạn:</label>
+            <input type="date" id="ngay_het_han" class="form-control">
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="gia_tien">Giá tiền:</label>
+            <input type="number" id="gia_tien" class="form-control " placeholder="VND">
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="file_anh">File anh</label>
+            <input type="file" id="gia_tien" class="form-control bg-secondary" placeholder="VND">
+            <div class="file_list" style="height:300px">
+                <img src="" alt=""><img src="" alt=""><img src="" alt="">
+            </div>
+
+        </div>
+        <div class="form-group mb-3">
+            <label for="dia_chi">Địa chỉ:</label>
+            <input type="text" id="dia_chi" class="form-control" placeholder="Nhập địa chỉ">
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="noi_dung">Nội dung:</label>
+            <textarea id="noi_dung" rows="4" class="form-control" placeholder="Mô tả chi tiết..."></textarea>
+        </div>
+
+        <button class="btn btn-primary">Đăng tin</button>
+    </div>
+</body>
+
+</html>
