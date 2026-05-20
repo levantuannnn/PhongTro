@@ -1,5 +1,5 @@
 package com.example.demo.Controller;
 
-public class RoomPerson {
+public class RoomController {
 
 }

@@ -9,12 +9,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.Model.Image;
 import com.example.demo.Service.Image_service;
 
-@Controller
-public class RoomImagePerson {
+@RestController
+@RequestMapping("/api/Rom") 
+public class AnhController {
     @Autowired
     private   Image_service image; 
     @GetMapping("/getall")
