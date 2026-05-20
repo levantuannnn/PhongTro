@@ -17,9 +17,9 @@ public class User_service {
         return userRepository.findAll();
     }
 
-    public Boolean check(User try_user) {
+    public Boolean check(String username, String password) {
         return userRepository
-                .findByUsernameAndPassword(try_user.getUsername(), try_user.getPassword())
+                .findByUsernameAndPassword(username,password)
                 .isPresent();
         
     }
