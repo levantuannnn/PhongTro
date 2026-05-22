@@ -35,8 +35,8 @@ public class Userpersons {
     }
 
     @PostMapping("/adduser")
-    public ResponseEntity<?> addUser(@RequestBody User user) {
-        Boolean check = ans.addUser(user);
+    public ResponseEntity<?> addUser(@RequestParam String username, @RequestParam  String password) {
+        Boolean check = ans.addUser(username,password);
         return ResponseEntity.ok(check);
     }
 }

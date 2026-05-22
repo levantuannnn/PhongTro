@@ -24,10 +24,13 @@ public class User_service {
         
     }
 
-    public Boolean addUser(User adduser) {
-        Optional<User> existing = userRepository.findByUsername(adduser.getUsername());
+    public Boolean addUser(String  username, String password) {
+        Optional<User> existing = userRepository.findByUsername(username);
         if (existing.isEmpty()) {
-            userRepository.save(adduser);
+        	User user=new User();
+        	user.setPassword(password);
+        	user.setUsername(username);
+            userRepository.save(user);
             return true;
         }
         return false;

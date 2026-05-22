@@ -2,6 +2,8 @@ package com.example.demo.Model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -27,8 +29,9 @@ public class User {
 
     @Column(name = "sdt", length = 20)
     private String sdt;
-
+    
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("user")
     private List<Room> rooms;    // Getters and setters
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }

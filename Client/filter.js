@@ -50,3 +50,19 @@ async function callpe() {
 }
 
 callpe();
+let diachi = document.querySelector(".addressFilter");
+let gia_toithieu = document.querySelector(".minPri");
+let gia_toida = document.querySelector(".maxPri");
+let dientich_toithieu = document.querySelector(".minDientich");
+let dientich_toida = document.querySelector(".maxDientich");
+let locketqua = document.querySelector(".locketqua");
+let url = ""
+async function filter() {
+
+    try {
+        let response = await fetch(url, { method: "POST" })
+        let data = await response.json();
+
+    }
+    catch (error) { console.log(error) };
+}

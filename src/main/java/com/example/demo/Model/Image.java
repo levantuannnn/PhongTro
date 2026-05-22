@@ -30,8 +30,7 @@ public class Image{
     public void setId(Long id) { this.id = id; }
 
     public Room getRoom() { return room; }
-    public void setRoom(Room room) { this.room = room; }
-
+    public void setRoom(Room room) { this.room = room; } 
     public String getImage() { return image; }
     public void setImage(String image) { this.image = image; }
 }

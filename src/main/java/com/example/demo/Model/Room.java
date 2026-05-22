@@ -5,6 +5,9 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -24,7 +27,8 @@ public class Room {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToOne
+    @ManyToOne 
+    @JsonIgnoreProperties("rooms")
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
@@ -39,16 +43,15 @@ public class Room {
     private String noiDung;
 
     @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("room")
     private List<Image> images;
 
     // Getters và Setters
 
     public Integer getId() { return id; }
-    public void setId(Integer id) { this.id = id; }
-
+    public void setId(Integer id) { this.id = id; } 
     public User getUser() { return user; }
-    public void setUser(User user) { this.user = user; }
-
+    public void setUser(User user) { this.user = user; } 
     public LocalDateTime getCreatedAt() { return createdAt; }
     public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
 

@@ -1,12 +1,13 @@
 package com.example.demo.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.Model.Room;
-import com.example.demo.Repository.RoomRepository;
+import com.example.demo.Model.Room; 
 import com.example.demo.Jparepository.Roomperson;
 
 @Service
@@ -44,7 +45,10 @@ public class Room_service {
 
         return null;
     }
-
+    public List<Room> checkfilter(String diachi,BigDecimal giatoithieu,BigDecimal giatoida) {
+    	 List<Room> roms=roomRepository.findByAddress(diachi);
+    	 return roms;
+    }
     public String deleteRoom(Integer id) {
 
         Room room = roomRepository.findById(id).orElse(null);
