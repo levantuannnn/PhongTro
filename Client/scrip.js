@@ -2,9 +2,9 @@ function login(url) {
     window.location.href = url;
 }
 
-// function dangtin(url) {
-//     window.location.href = url;
-// }
+function dangtin(url) {
+    window.location.href = url;
+}
 let btn = document.querySelector('.btn-primary');
 btn.addEventListener('click', () => {
     let url = 'dangtin.html';

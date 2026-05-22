@@ -1,7 +1,6 @@
-// Đợi HTML tải xong
+
 window.addEventListener('DOMContentLoaded', () => {
 
-    // ===== Lấy các phần tử =====
     const loginForm = document.querySelector(".form_login");
     const registerForm = document.querySelector(".from_sigin");
 
@@ -11,10 +10,6 @@ window.addEventListener('DOMContentLoaded', () => {
     const loginBtn = document.querySelector("#login_button");
     const registerBtn = document.querySelector("#register_button");
 
-    // ==========================
-    // HIỆN FORM ĐĂNG KÝ
-    // ==========================
-
     showRegister.addEventListener("click", (e) => {
         e.preventDefault();
 
@@ -22,9 +17,7 @@ window.addEventListener('DOMContentLoaded', () => {
         registerForm.style.display = "block";
     });
 
-    // ==========================
-    // HIỆN FORM ĐĂNG NHẬP
-    // ==========================
+
 
     showLogin.addEventListener("click", (e) => {
         e.preventDefault();
@@ -33,9 +26,6 @@ window.addEventListener('DOMContentLoaded', () => {
         loginForm.style.display = "block";
     });
 
-    // ==========================
-    // ĐĂNG KÝ
-    // ==========================
 
     registerBtn.addEventListener("click", (e) => {
 
@@ -96,9 +86,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     });
 
-    // ==========================
-    // ĐĂNG NHẬP
-    // ==========================
+
 
     loginBtn.addEventListener("click", (e) => {
 
