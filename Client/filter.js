@@ -36,7 +36,7 @@ async function callpe() {
             let image = document.createElement("img");
             image.className = "img-fluid rounded mb-2"; // Thêm class Bootstrap để ảnh tự co giãn đẹp mắt
             image.style.height = "200px";
-            image.style.width = "100px"               // Fix chiều cao bằng nhau cho các card đều đẹp
+            image.style.width = "200px"               // Fix chiều cao bằng nhau cho các card đều đẹp
             image.style.objectFit = "cover";            // Ảnh không bị méo khi thu phóng
 
             // Mặc định nếu phòng không có ảnh nào
