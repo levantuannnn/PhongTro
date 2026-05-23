@@ -3,12 +3,12 @@ let tanjson = document.querySelector('.call_person');
 
 // 1. Lắng nghe sự kiện DOMContentLoaded để ẩn nút đăng nhập và TỰ ĐỘNG GỌI HÀM CALLPE
 document.addEventListener("DOMContentLoaded", () => {
-    let username = localStorage.getItem("username");
+    let id = localStorage.getItem("userid");
     let loginBox = document.getElementById("login-box");
 
-    console.log("Username hiện tại:", username);
+    console.log("id hiện tại:", id);
 
-    if (username && loginBox) {
+    if (id) {
         loginBox.style.display = "none";
     }
 

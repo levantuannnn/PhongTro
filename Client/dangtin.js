@@ -23,7 +23,7 @@ if (fileanh) {
 let dangtin = document.querySelector(".dangtin");
 
 dangtin.addEventListener("click", () => {
-    const currentUserId = 1; // ID cứng phục vụ việc test
+    const currentUserId = localStorage.getItem("userid");
     if (!currentUserId) {
         alert("Vui lòng đăng nhập trước khi đăng tin!");
         return;
@@ -70,6 +70,7 @@ dangtin.addEventListener("click", () => {
             if (Response.data === true) {
                 alert("Thêm thành công");
                 window.location.reload();
+                window.location.href = "index.html";
             } else {
                 alert("Thêm thất bại, kiểm tra lại dữ liệu Backend");
             }

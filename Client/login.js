@@ -116,7 +116,7 @@ window.addEventListener('DOMContentLoaded', () => {
                     alert("dang nhap thanh cong")
                     // Lưu cả 2 thông tin vào localStorage để sang trang index.html dùng
                     localStorage.setItem("username", username);
-                    localStorage.setItem("userid", response.data.id); // Lưu ID từ backend trả về
+                    localStorage.setItem("userid", response.data); // Lưu ID từ backend trả về
 
                     // Chuyển trang
                     window.location.href = "index.html";
