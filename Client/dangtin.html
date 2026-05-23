@@ -31,11 +31,22 @@
 
         <div class="form-group mb-3">
             <label for="file_anh">File anh</label>
-            <input type="file" id="gia_tien" class="form-control bg-secondary" placeholder="VND">
-            <div class="file_list" style="height:300px">
-                <img src="" alt=""><img src="" alt=""><img src="" alt="">
-            </div>
+            <input type="file" multiple id="gia_tien" class="form-control bg-secondary file_anh" placeholder="VND">
+            <div class="file_list row" style="height:300px">
 
+                <div class="col-4">
+                    <img src="" alt="" class="filetan w-100">
+                </div>
+
+                <div class="col-4">
+                    <img src="" alt="" class="filetan w-100">
+                </div>
+
+                <div class="col-4">
+                    <img src="" alt="" class="filetan w-100">
+                </div>
+
+            </div>
         </div>
         <div class="form-group mb-3">
             <label for="dia_chi">Địa chỉ:</label>
@@ -47,8 +58,10 @@
             <textarea id="noi_dung" rows="4" class="form-control" placeholder="Mô tả chi tiết..."></textarea>
         </div>
 
-        <button class="btn btn-primary">Đăng tin</button>
+        <button class="btn btn-primary dangtin">Đăng tin</button>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="dangtin.js"></script>
 </body>
 
 </html>

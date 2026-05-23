@@ -107,22 +107,24 @@ window.addEventListener('DOMContentLoaded', () => {
             + password
         )
             .then(response => {
-                console.log(username)
-                console.log(password)
-                if (response.data === true) {
+                const userId = response.data;
 
-                    alert("Đăng nhập thành công");
+                console.log("ID người dùng nhận được:", userId); // Kết quả sẽ ra số (Ví dụ: 1, 2) chứ không bị undefined nữa
 
-                    // lưu user
+                // Nếu tìm thấy user hợp lệ (Backend trả về ID > 0)
+                if (userId && userId > 0) {
+                    alert("dang nhap thanh cong")
+                    // Lưu cả 2 thông tin vào localStorage để sang trang index.html dùng
                     localStorage.setItem("username", username);
+                    localStorage.setItem("userid", response.data.id); // Lưu ID từ backend trả về
 
-                    // chuyển trang
+                    // Chuyển trang
                     window.location.href = "index.html";
 
                 } else {
+                    // Trường hợp backend trả về null hoặc báo sai tài khoản/mật khẩu
                     alert("Sai tài khoản hoặc mật khẩu");
                 }
-
             })
             .catch(error => {
                 console.log(error);

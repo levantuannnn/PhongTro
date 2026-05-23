@@ -4,6 +4,11 @@
     gap: 20px;
 }
 
+.filetan {
+    height: 250px;
+    object-fit: cover;
+}
+
 * {
     box-sizing: border-box;
     margin: 0;

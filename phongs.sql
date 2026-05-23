@@ -27,7 +27,7 @@ CREATE TABLE room_images (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     room_id INT,
     image TEXT,
-
+    image_data LONGBLOB,
     CONSTRAINT fk_image_room
     FOREIGN KEY (room_id)
     REFERENCES rooms(id)

@@ -30,7 +30,7 @@ public class Userpersons {
 
     @PostMapping("/login/user")
     public ResponseEntity<?> checkUser(@RequestParam String username, @RequestParam String password) {
-        Boolean check = ans.check(username,password);
+       Integer check = ans.check(username,password);
         return ResponseEntity.ok(check);
     }
 

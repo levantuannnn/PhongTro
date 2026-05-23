@@ -17,10 +17,10 @@ public class User_service {
         return userRepository.findAll();
     }
 
-    public Boolean check(String username, String password) {
-        return userRepository
-                .findByUsernameAndPassword(username,password)
-                .isPresent();
+    public Integer check(String username, String password) {
+       User user= userRepository
+                .findByUsernameAndPassword(username,password).orElse(null);
+       return user.getId();
         
     }
 

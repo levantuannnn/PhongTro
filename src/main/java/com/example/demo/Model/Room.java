@@ -32,7 +32,7 @@ public class Room {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    private LocalDateTime createdAt = LocalDateTime.now();
+    private LocalDate createdAt;
     private LocalDate expiredAt;
 
     private BigDecimal price;
@@ -52,10 +52,14 @@ public class Room {
     public void setId(Integer id) { this.id = id; } 
     public User getUser() { return user; }
     public void setUser(User user) { this.user = user; } 
-    public LocalDateTime getCreatedAt() { return createdAt; }
-    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
-
-    public LocalDate getExpiredAt() { return expiredAt; }
+    
+    public LocalDate getCreatedAt() {
+		return createdAt;
+	}
+	public void setCreatedAt(LocalDate createdAt) {
+		this.createdAt = createdAt;
+	}
+	public LocalDate getExpiredAt() { return expiredAt; }
     public void setExpiredAt(LocalDate expiredAt) { this.expiredAt = expiredAt; }
 
     public BigDecimal getPrice() { return price; }

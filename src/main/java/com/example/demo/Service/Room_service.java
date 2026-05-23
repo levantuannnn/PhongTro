@@ -1,21 +1,34 @@
 package com.example.demo.Service;
 
+ 
 import java.math.BigDecimal;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
-import com.example.demo.Model.Room; 
+import com.example.demo.Model.Image;
+import com.example.demo.Model.Room;
+import com.example.demo.Model.User;
+import com.example.demo.Jparepository.Imageperson;
 import com.example.demo.Jparepository.Roomperson;
+import com.example.demo.Jparepository.Userperson;
 
 @Service
 public class Room_service {
 
     @Autowired
     private Roomperson roomRepository;
-
+    @Autowired
+    private Imageperson ige;
+    @Autowired
+    private Userperson person;
     public List<Room> getAllRooms() {
         return roomRepository.findAll();
     }
@@ -59,5 +72,54 @@ public class Room_service {
         }
 
         return "Khong tim thay phong";
+    }
+    public Boolean uploadCheckfile(Integer id,
+            LocalDate ngaydang,
+            LocalDate hethan,
+            BigDecimal giatien,
+            String diachi,
+            String noidung, List<MultipartFile> file
+    ) {
+
+        try {
+        	User user=person.findById(id).orElse(null);
+            Room room = new Room();
+            room.setUser(user);
+            room.setCreatedAt(ngaydang);
+            room.setExpiredAt(hethan);
+            room.setPrice(giatien);
+            room.setAddress(diachi);
+            room.setNoiDung(noidung);
+
+            List<Image> imageList = new ArrayList<>();
+
+            if (file != null && !file.isEmpty()) {
+
+                for (MultipartFile multipartFile : file) {
+
+                    Image image = new Image();
+
+                    image.setImage_data(multipartFile.getBytes());
+
+                    image.setRoom(room); // ⭐ QUAN TRỌNG
+
+                    imageList.add(image);
+                }
+            }
+
+            room.setImages(imageList);
+
+            roomRepository.save(room);
+
+            return true;
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+
+            return false;
+
+        }
+
     }
 }
