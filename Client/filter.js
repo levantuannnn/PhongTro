@@ -8,186 +8,148 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log("id hiện tại:", id);
 
     if (id) {
-        loginBox.style.display = "none";
+        if (loginBox) loginBox.style.display = "none";
     }
     callpe();
 });
 
-// 2. Hàm lấy danh sách phòng trọ và render ra giao diện Card
+function renderRooms(data) {
+    if (!tanjson) return;
+    tanjson.innerHTML = ""; // Xóa sạch dữ liệu cũ
+
+    if (!data || data.length === 0) {
+        tanjson.innerHTML = "<p class='text-center text-muted w-100'>Không tìm thấy phòng trọ nào phù hợp.</p>";
+        return;
+    }
+
+    data.forEach(room => {
+        // Tạo khung Card Bootstrap
+        let card = document.createElement("div");
+        card.className = "col-12 col-md-6 col-xl-4 mb-4";
+
+        // Tạo thẻ chứa ảnh
+        let image = document.createElement("img");
+        image.className = "img-fluid rounded mb-2";
+        image.style.height = "200px";
+        image.style.width = "100%"; // Để width 100% card sẽ chuẩn Bootstrap hơn là cố định 200px
+        image.style.objectFit = "cover";
+
+        // Mặc định nếu phòng không có ảnh nào
+        image.src = "https://via.placeholder.com/350x200?text=No+Image";
+
+        if (room.images && room.images.length > 0) {
+            let firstImageObj = room.images[0];
+            let base64String = firstImageObj.image_data || firstImageObj.image;
+
+            if (base64String) {
+                // Kiểm tra xem backend trả về dạng link hay base64 nguyên bản
+                if (base64String.startsWith('http') || base64String.startsWith('data:')) {
+                    image.src = base64String;
+                } else {
+                    image.src = `data:image/jpeg;base64,${base64String.trim()}`;
+                }
+            }
+        }
+
+        // Tạo thẻ hiển thị giá tiền
+        let price = document.createElement("strong");
+        price.className = "d-block text-danger fs-5";
+        price.innerText = Number(room.price || 0).toLocaleString('vi-VN') + " đ/tháng";
+
+        // Tạo thẻ hiển thị diện tích
+        let dientich = document.createElement("p");
+        dientich.className = "mb-1 fw-bold text-secondary";
+        dientich.innerText = `Diện tích: ${room.dientich || '---'} m²`;
+
+        // Tạo thẻ hiển thị địa chỉ
+        let address = document.createElement("p");
+        address.className = "text-muted small text-truncate mb-1";
+        address.innerText = "địa chỉ: " + room.address || "";
+
+        // Tạo thẻ nội dung mô tả
+        let noidung = document.createElement("p");
+        noidung.className = "text-truncate mb-1 small";
+        noidung.innerText = "nội dung: " + room.noiDung || "";
+
+        // Tạo thẻ thời gian đăng
+        let thoigian = document.createElement("p");
+        thoigian.className = "text-muted extra-small"
+        thoigian.style.fontSize = "12px";
+        thoigian.innerText = "Ngày đăng: " + (room.createdAt || "---");
+
+        // Tiến hành Append các thành phần vào cấu trúc Card
+        card.appendChild(image);
+        card.appendChild(price);
+        card.appendChild(dientich);
+        card.appendChild(address);
+        card.appendChild(noidung);
+        card.appendChild(thoigian);
+
+        // Đẩy Card vào vùng chứa chính trên giao diện HTML
+        tanjson.appendChild(card);
+    });
+}
+
+// 1. Hàm lấy TOÀN BỘ danh sách phòng trọ ban đầu
 async function callpe() {
     try {
         let response = await fetch(url);
         let data = await response.json();
-
         console.log("Dữ liệu phòng nhận được từ API:", data);
-
-        // Xóa sạch dữ liệu cũ trong khung chứa (nếu có) trước khi append dữ liệu mới
-        if (tanjson) tanjson.innerHTML = "";
-
-        data.forEach(room => {
-            // Tạo khung Card Bootstrap
-            let card = document.createElement("div");
-            card.className = "col-12 col-md-6 col-xl-4 mb-4"; // Đã sửa mr-5 thành mb-4 cho chuẩn lưới Bootstrap
-
-            // Tạo thẻ chứa ảnh
-            let image = document.createElement("img");
-            image.className = "img-fluid rounded mb-2"; // Thêm class Bootstrap để ảnh tự co giãn đẹp mắt
-            image.style.height = "200px";
-            image.style.width = "200px"               // Fix chiều cao bằng nhau cho các card đều đẹp
-            image.style.objectFit = "cover";            // Ảnh không bị méo khi thu phóng
-
-            // Mặc định nếu phòng không có ảnh nào
-            image.src = "https://via.placeholder.com/350x200?text=No+Image";
-
-            if (room.images && room.images.length > 0) {
-                let firstImageObj = room.images[0];
-
-                // Kiểm tra xem backend của bạn trả về thuộc tính là 'image_data' hay 'image'
-                let base64String = firstImageObj.image_data || firstImageObj.image;
-
-                if (base64String) {
-                    // Ghép tiền tố Base64 vào src để trình duyệt hiểu được mảng byte dữ liệu ảnh
-                    image.src = `data:image/jpeg;base64,${base64String}`;
-                }
-            }
-
-            // Tạo thẻ hiển thị giá tiền
-            let price = document.createElement("strong");
-            price.className = "d-block text-danger fs-5";
-            // Định dạng giá tiền nhìn cho chuyên nghiệp (Ví dụ: 2000000 -> 2.000.000 đ)
-            price.innerText = Number(room.price).toLocaleString('vi-VN') + " đ/tháng";
-
-            // Tạo thẻ hiển thị địa chỉ
-            let address = document.createElement("p");
-            address.className = "text-muted small text-truncate"; // Ẩn văn bản thừa nếu địa chỉ quá dài
-            address.innerText = room.address;
-            let noidung = document.createElement("p");
-            noidung.innerText = room.noiDung
-            let thoigian = document.createElement("p")
-            thoigian.innerText = room.createdAt;
-            let dientich = document.createElement("p");
-            dientich.innerText = room.dientich;
-
-            // Tiến hành Append các thành phần vào cấu trúc Card
-            card.appendChild(image);
-            card.appendChild(price);
-            card.appendChild(dientich);
-            card.appendChild(address);
-            card.appendChild(noidung);
-            card.appendChild(thoigian)
-
-            // Đẩy Card vào vùng chứa chính trên giao diện HTML
-            if (tanjson) {
-                tanjson.appendChild(card);
-            }
-        });
-
+        renderRooms(data);
     } catch (error) {
         console.error("Lỗi khi gọi API lấy danh sách phòng trọ:", error);
     }
 }
-console.log("tim kiem hien thi")
 
-
+// 2. Chức năng TÌM KIẾM nhanh bằng phím Enter
 let timkiem = document.querySelector(".timkiem");
+if (timkiem) {
+    timkiem.addEventListener("keydown", async (e) => {
+        if (e.key === "Enter") {
+            let valueSearch = timkiem.value.trim();
+            let url_timkiem = `http://localhost:8080/api/room/getall?tim=${encodeURIComponent(valueSearch)}`;
 
-timkiem.addEventListener("keydown", async (e) => {
-
-    if (e.key === "Enter") {
-
-        let valueSearch = timkiem.value;
-
-        let url_timkiem =
-            "http://localhost:8080/api/room/getall?tim="
-            + valueSearch;
-
-        console.log(valueSearch);
-
-        try {
-
-            let response = await fetch(url_timkiem);
-
-            let data = await response.json();
-
-            console.log(data);
-
-            tanjson.innerHTML = "";
-
-            data.forEach(room => {
-
-                let card = document.createElement("div");
-
-                card.className =
-                    "col-12 col-md-6 col-xl-4 mb-4";
-
-                let image = document.createElement("img");
-
-                image.style.width = "200px";
-                image.style.height = "200px";
-                image.style.objectFit = "cover";
-
-                if (
-                    room.images &&
-                    room.images.length > 0
-                ) {
-
-                    let firstImage =
-                        room.images[0];
-
-                    if (firstImage.image_data) {
-
-                        image.src =
-                            `data:image/jpeg;base64,
-                        ${firstImage.image_data}`;
-
-                    } else if (firstImage.image) {
-
-                        image.src =
-                            firstImage.image;
-                    }
-                }
-
-                let address =
-                    document.createElement("p");
-
-                address.innerText =
-                    room.address;
-                let batdau = document.createElement("p")
-                batdau.innerText = room.createdAt
-                let price = document.createElement("strong");
-                price.className = "d-block text-danger fs-5";
-                // Định dạng giá tiền nhìn cho chuyên nghiệp (Ví dụ: 2000000 -> 2.000.000 đ)
-                price.innerText = Number(room.price).toLocaleString('vi-VN') + " đ/tháng";
-                let dientich = document.createElement("p");
-                dientich.innerText = room.dientich;
-
-                card.appendChild(image);
-                card.appendChild(price);
-                card.appendChild(dientich);
-                card.appendChild(address);
-                card.appendChild(batdau)
-                tanjson.appendChild(card);
-            });
-
-        } catch (error) {
-
-            console.log(error);
+            try {
+                let response = await fetch(url_timkiem);
+                let data = await response.json();
+                renderRooms(data);
+            } catch (error) {
+                console.error("Lỗi tìm kiếm:", error);
+            }
         }
+    });
+}
+
+// 3. Chức năng LỌC nâng cao (Nhiều thuộc tính)
+let diachi = document.querySelector(".addressFilter");
+let gia_toithieu = document.querySelector(".minPri");
+let gia_toida = document.querySelector(".maxPri");
+let dientich_toithieu = document.querySelector(".minDientich");
+let dientich_toida = document.querySelector(".maxDientich");
+let locketqua = document.querySelector(".locketqua");
+
+async function applyFilter() {
+    let valDiaChi = diachi ? diachi.value : "";
+    let valMinGia = gia_toithieu ? gia_toithieu.value : "";
+    let valMaxGia = gia_toida ? gia_toida.value : "";
+    let valMinDT = dientich_toithieu ? dientich_toithieu.value : "";
+    let valMaxDT = dientich_toida ? dientich_toida.value : "";
+
+    let url_filter = `http://localhost:8080/api/room/loc?diachi=${encodeURIComponent(valDiaChi)}&giatoithieu=${valMinGia}&giatoida=${valMaxGia}&dientoithieu=${valMinDT}&dientoida=${valMaxDT}`;
+
+    console.log("Đường dẫn lọc gửi đi:", url_filter);
+
+    try {
+        let response = await fetch(url_filter, { method: "GET" });
+        let data = await response.json();
+        renderRooms(data); // Gọi hàm render dùng chung
+    } catch (error) {
+        console.error("Lỗi khi lọc kết quả:", error);
     }
-});
-// let diachi = document.querySelector(".addressFilter");
-// let gia_toithieu = document.querySelector(".minPri");
-// let gia_toida = document.querySelector(".maxPri");
-// let dientich_toithieu = document.querySelector(".minDientich");
-// let dientich_toida = document.querySelector(".maxDientich");
-// let locketqua = document.querySelector(".locketqua");
-// let url = ""
-// async function filter() {
+}
 
-//     try {
-//         let response = await fetch(url, { method: "POST" })
-//         let data = await response.json();
-
-//     }
-//     catch (error) { console.log(error) };
-// }
+// ĐÃ SỬA: Lắng nghe sự kiện click vào nút Lọc để kích hoạt hàm lọc
+if (locketqua) {
+    locketqua.addEventListener("click", applyFilter);
+}
