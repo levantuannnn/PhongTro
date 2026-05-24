@@ -3,12 +3,17 @@ let tanjson = document.querySelector('.call_person');
 
 document.addEventListener("DOMContentLoaded", () => {
     let id = localStorage.getItem("userid");
-    let loginBox = document.getElementById("login-box");
+    let loginBox = document.querySelector(".usernames");
 
     console.log("id hiện tại:", id);
 
-    if (id) {
-        if (loginBox) loginBox.style.display = "none";
+    if (id != 0) {
+        if (loginBox) {
+            loginBox.style.display = "none";
+            let use_name = document.querySelector(".use_name");
+            use_name.innerText = localStorage.getItem("username")
+        }
+
     }
     callpe();
 });

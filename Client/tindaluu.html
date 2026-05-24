@@ -1,3 +1,6 @@
+code lại giao diện nhìn lại đẹp đừng sửa gì về cả nhé
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,147 +9,188 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Phong Trọ Số 1</title>
 
-    <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous" />
 
-    <!-- Font Awesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
         integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css" />
+</head>
 
 <body>
-    <!-- Header -->
     <header class="header container-fluid py-4">
-        <div class="container_hi row d-flex justify-content-center">
-            <div class="col-md-5 container_element d-flex justify-content-evenly  align-items-center  col-12 col-xl-7">
-                <img src="/img_header/logo.svg" alt="Logo" style="height: 40px" />
+        <div class="container_hi row d-flex justify-content-center align-items-center">
+            <div
+                class="col-12 col-md-5 col-xl-7 container_element d-flex justify-content-evenly align-items-center gap-2">
+                <img src="img_header/logo.svg" alt="Logo" style="height: 40px;" />
+                <input type="text" class="form-control timkiem" placeholder="Tìm kiếm..." />
 
-                <input type="text" class="form-control  " placeholder="Tìm kiếm..." />
-
-                <div onclick="handale()" role="button" class="d-flex align-items-centern d-none d-xl-block">
+                <div role="button" class="d-none d-xl-flex align-items-center bo_loc" onclick="boloc()">
                     <i class="fa-solid fa-filter me-1"></i> Bộ lọc
                 </div>
 
                 <button id="menuToggle" class="btn btn-outline-secondary">☰</button>
             </div>
 
-            <!-- User actions -->
             <div
-                class="col-md-7 header_container_try col-xl-5 d-flex  justify-content-evenly align-items-center gap-3 mt-3 mt-md-0">
-                <div><i class="fa-solid fa-heart"></i>Tin đã lưu</div>
-                <div onclick="login('dangnhap.html')">
-                    <i class="fa-solid fa-user-plus"></i>
-                    <a href="dangnhap.html">Đăng Nhập</a>
+                class="col-12 col-md-7 col-xl-5 header_container_try d-flex justify-content-evenly align-items-center gap-3 mt-3 mt-md-0">
+                <div style="cursor: pointer;"><i class="fa-solid fa-heart me-1"></i>Tin đã lưu</div>
+                <div id="login-box" class="d-flex align-items-center" style="cursor: pointer;"
+                    onclick="login('dangnhap.html')">
+                    <i class="fa-solid fa-user-plus me-1"></i>
+                    <a href="dangnhap.html" class="usernames text-decoration-none">Đăng Nhập</a>
                 </div>
-                <button class="btn btn-primary">Đăng Tin</button>
+                <button class="btn btn-primary" onclick="dangtin('dangtin.html')">Đăng Tin</button>
             </div>
         </div>
 
-        <!-- Side Menu -->
         <div id="sideMenu" class="d-none mt-3">
             <ul class="list-unstyled">
-                <li class="acti" style="cursor: pointer;">X</li>
-                <li><a href="#">Trang chủ</a></li>
-                <li><a href="#">Giới thiệu</a></li>
-                <li><a href="#">Liên hệ</a></li>
+                <li class="acti" style="cursor: pointer; font-weight: bold;">X</li>
+                <li><a href="#" class="text-decoration-none">Trang chủ</a></li>
+                <li><a href="#" class="text-decoration-none">Giới thiệu</a></li>
+                <li><a href="#" class="text-decoration-none">Liên hệ</a></li>
             </ul>
         </div>
 
-        <!-- Menu danh mục -->
         <div class="menu row mt-3">
             <ul class="menu_try list-unstyled d-flex justify-content-center gap-4 mb-0">
-                <li><a href="#">Phòng Trọ</a></li>
-                <li><a href="#">Nhà Nguyên Căn</a></li>
-                <li><a href="#">Căn hộ chung cư</a></li>
+                <li><a href="#" class="text-decoration-none fw-bold">Phòng Trọ</a></li>
+                <li><a href="#" class="text-decoration-none fw-bold">Nhà Nguyên Căn</a></li>
+                <li><a href="#" class="text-decoration-none fw-bold">Căn hộ chung cư</a></li>
             </ul>
         </div>
-
-        <script src="scrip.js"></script>
     </header>
-    <!-- Main -->
-    <main class="main container-fluid py-3">
-        <div class="main_element row">
-            <div class="main_text col-12 d-flex flex-column    col-xl-8">
-                <div class="content_main"
-                    style="color: rgb(8, 8, 8); font-weight: bold; font-size: 40px; text-align: center; margin-right: 30px;">
-                    Phòng trọ số 1 Thành Phố Huế</div>
-                <div class="content_main_text d-flex justify-content-center">
-                    <a href="" class="main_dexuat"
-                        style="color: rgb(8, 8, 8); font-weight: bold; font-size: 20px; text-align: center; margin-right: 30px; border:none; border-bottom: 2px solid black;">
-                        Đề Xuất</a>
-                    <a href="" class="main_moidang"
-                        style="color: rgb(3, 3, 3); font-weight: bold; font-size: 20px; text-align: center; border:none; border-bottom: 2px solid black;">Mới
-                        Đăng</a>
+
+    <div class="filter-container card shadow p-3 d-none bg-primary text-white"
+        style="position: fixed; top: 170px; left: 50%; transform: translateX(-50%); z-index: 1200; width: 90%; max-width: 500px;">
+        <h5 class="card-title text-center mb-3">Lọc kết quả</h5>
+
+        <div class="mb-3">
+            <label for="addressFilter" class="form-label">Địa chỉ</label>
+            <input type="text" id="addressFilter" class="form-control" placeholder="Nhập địa chỉ...">
+        </div>
+
+        <div class="mb-3 row">
+            <div class="col">
+                <label for="minPrice" class="form-label">Giá tối thiểu</label>
+                <input type="number" id="minPrice" class="form-control minPri" placeholder="VNĐ">
+            </div>
+            <div class="col">
+                <label for="maxPrice" class="form-label">Giá tối đa</label>
+                <input type="number" id="maxPrice" class="form-control maxPri" placeholder="VNĐ">
+            </div>
+        </div>
+
+        <div class="mb-3 row">
+            <div class="col">
+                <label for="minArea" class="form-label">Diện tích tối thiểu (m²)</label>
+                <input type="number" id="minArea" class="form-control minDientich" placeholder="m²">
+            </div>
+            <div class="col">
+                <label for="maxArea" class="form-label">Diện tích tối đa (m²)</label>
+                <input type="number" id="maxArea" class="form-control maxDientich" placeholder="m²">
+            </div>
+        </div>
+
+        <div class="text-center">
+            <button class="btn btn-light w-100 locketqua fw-bold" onclick="applyFilter()">Lọc kết quả</button>
+        </div>
+    </div>
+
+    <main class="main container py-3">
+        <div class="main_element row g-4">
+            <div class="main_text col-12 col-xl-8 d-flex flex-column">
+                <h1 class="content_main text-center mb-4" style="color: #080808; font-weight: bold; font-size: 32px;">
+                    Phòng trọ số 1 Thành Phố Huế
+                </h1>
+
+                <div class="content_main_text d-flex justify-content-center gap-4 border-bottom pb-2">
+                    <a href="" class="main_dexuat text-decoration-none pb-1"
+                        style="color: #080808; font-weight: bold; font-size: 18px; border-bottom: 2px solid black;">
+                        Đề Xuất
+                    </a>
+                    <a href="" class="main_moidang text-decoration-none pb-1"
+                        style="color: #030303; font-weight: bold; font-size: 18px; border-bottom: 2px solid transparent;">
+                        Mới Đăng
+                    </a>
                 </div>
 
+                <div class="call_person row g-3 mt-3"></div>
             </div>
-            <div class="main_money col-xl-3 d-none d-xl-block"> <br>
-                <div class="main_money_context" style="background-color:black; height:300px">
-                    <h3 style="color: aliceblue; font-weight: bold; font-size: 20px; text-align: center;">Xem theo bang
-                        gia</h3>
-                    <div class="money_text d-flex justify-content-around">
-                        <a href="" class="1trieu">dưới 1 triệu</a>
-                        <a href="" class="greater_than_1-2">từ 1-2 triệu</a>
+
+            <div class="main_money col-xl-4 d-none d-xl-block">
+                <div class="main_money_context bg-dark text-white p-3 rounded mb-4" style="min-height: 300px;">
+                    <h3 class="text-center mb-3" style="font-size: 18px; font-weight: bold; color: #f1f1f1;">Xem theo
+                        bảng giá</h3>
+                    <div class="money_text d-flex justify-content-around mb-2">
+                        <a href="" class="1trieu text-warning text-decoration-none">Dưới 1 triệu</a>
+                        <a href="" class="greater_than_1-2 text-warning text-decoration-none">Từ 1-2 triệu</a>
+                    </div>
+                    <div class="money_text d-flex justify-content-around mb-4">
+                        <a href="" class="3trieu text-warning text-decoration-none">Dưới 3 triệu</a>
+                        <a href="" class="greater_than_3-4 text-warning text-decoration-none">Từ 3-4 triệu</a>
+                    </div>
+
+                    <h3 class="text-center mb-3" style="font-size: 18px; font-weight: bold; color: #f1f1f1;">Xem theo
+                        diện tích</h3>
+                    <div class="money_text d-flex justify-content-around mb-2">
+                        <a href="" class="20m text-warning text-decoration-none">Dưới 20 m²</a>
+                        <a href="" class="20m-30m text-warning text-decoration-none">Từ 20-30 m²</a>
                     </div>
                     <div class="money_text d-flex justify-content-around">
-                        <a href="" class="3trieu">dưới 3 triệu</a>
-                        <a href="" class="greater_than_3-4">từ 3-4 triệu</a>
-                    </div>
-                    <br>
-                    <div class="main_money_context">
-                        <h3 style="color: aliceblue; font-weight: bold; font-size: 20px; text-align: center;">Xem theo
-                            dien tich </h3>
-                        <div class="money_text d-flex justify-content-around">
-                            <a href="" class="20m">dưới 20 m&sup2;</a>
-                            <a href="" lclass="20m-30m">từ 20 m&sup2;-30 m&sup2;</a>
-                        </div>
-                        <div class="money_text d-flex justify-content-around">
-                            <a href="" class="40m">dưới 30 m&sup2;</a>
-                            <a href="" class="30-40m">từ 30 m&sup2;-40 m&sup2;</a>
-                        </div>
+                        <a href="" class="40m text-warning text-decoration-none">Dưới 30 m²</a>
+                        <a href="" class="30-40m text-warning text-decoration-none">Từ 30-40 m²</a>
                     </div>
                 </div>
-                <br>
-                <div class="main_content_moi" style="background-color:black; height:1000px"> <br>
-                    <h3 style="color: aliceblue; font-weight: bold; font-size: 20px; text-align: center;">Tin mới đăng
+
+                <div class="main_content_moi bg-dark text-white p-3 rounded" style="min-height: 400px;">
+                    <h3 class="text-center" style="font-size: 18px; font-weight: bold; color: #f1f1f1;">Tin mới đăng
                     </h3>
                 </div>
             </div>
         </div>
     </main>
-    <footer class="footer container-fluid bg-dark text-light  " style="margin-top: 0px;">
+
+    <footer class="footer container-fluid bg-dark text-light py-5 mt-5">
         <div class="container">
-            <div class="row">
-                <div class="col-12 col-md-4 mb-3">
-                    <h5 class="text-warning">PhongTroSo1</h5>
-                    <p class="text-muted">Tìm phòng nhanh chóng, chính chủ, uy tín tại Huế và các tỉnh thành khác.</p>
+            <div class="row g-4">
+                <div class="col-12 col-md-4">
+                    <h5 class="text-warning fw-bold mb-3">PhongTroSo1</h5>
+                    <p class="text-muted small">Tìm phòng nhanh chóng, chính chủ, uy tín tại Huế và các tỉnh thành khác.
+                    </p>
                 </div>
-                <div class="col-6 col-md-4 mb-3">
-                    <h5 class="text-warning">Liên kết</h5>
+                <div class="col-6 col-md-4">
+                    <h5 class="text-warning fw-bold mb-3">Liên kết</h5>
                     <ul class="list-unstyled">
-                        <li><a href="#" class="text-light link-hover">Trang chủ</a></li>
-                        <li><a href="#" class="text-light link-hover">Giới thiệu</a></li>
-                        <li><a href="#" class="text-light link-hover">Liên hệ</a></li>
-                        <li><a href="#" class="text-light link-hover">Đăng tin</a></li>
+                        <li class="mb-3"><a href="#" class="text-light text-decoration-none link-hover">Trang chủ</a>
+                        </li>
+                        <li class="mb-3"><a href="#" class="text-light text-decoration-none link-hover">Giới thiệu</a>
+                        </li>
+                        <li class="mb-3"><a href="#" class="text-light text-decoration-none link-hover">Liên hệ</a></li>
+                        <li class="mb-3"><a href="#" class="text-light text-decoration-none link-hover">Đăng tin</a>
+                        </li>
                     </ul>
                 </div>
-                <div class="col-6 col-md-4 mb-3">
-                    <h5 class="text-warning">Liên hệ</h5>
-                    <p><i class="fa-solid fa-envelope me-2"></i> phongtroso1@gmail.com</p>
-                    <p><i class="fa-solid fa-phone me-2"></i> 0123 456 789</p>
-                    <p><i class="fa-solid fa-location-dot me-2"></i> TP. Huế, Việt Nam</p>
+                <div class="col-6 col-md-4">
+                    <h5 class="text-warning fw-bold mb-3">Liên hệ</h5>
+                    <p class="mb-2"><i class="fa-solid fa-envelope text-warning me-2"></i>phongtroso1@gmail.com</p>
+                    <p class="mb-2"><i class="fa-solid fa-phone text-warning me-2"></i>0123 456 789</p>
+                    <p class="mb-0"><i class="fa-solid fa-location-dot text-warning me-2"></i>TP. Huế, Việt Nam</p>
                 </div>
             </div>
-            <hr class="border-secondary">
-            <div class="text-center text-secondary">
-                © 2025 <span class="text-warning">PhongTroSo1</span>. All rights reserved.
+            <hr class="border-secondary my-4">
+            <div class="text-center text-secondary small">
+                © 2026 <span class="text-warning fw-bold">PhongTroSo1</span>. All rights reserved.
             </div>
         </div>
     </footer>
+
+    <script src="scrip.js"></script>
+    <script src="filter.js"></script>
 </body>
 
 </html>
+```
