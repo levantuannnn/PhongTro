@@ -44,7 +44,11 @@ public class RoomController {
     	 if( room.timkiem(tim)!=null) {
     		  return room.timkiem(tim); 
     	 }
-    	 return null;
-    	 
+    	 return null; 
+    }
+    @GetMapping("/loc")
+    public List<Room>  loctat(@RequestParam String diachi,@RequestParam BigDecimal giatoithieu, 
+    		@RequestParam BigDecimal giatoida,@RequestParam Integer dientoithieu,@RequestParam Integer dientoida){
+    	 return room.loctim(diachi, giatoithieu, giatoida, dientoithieu, dientoida);
     }
 }
