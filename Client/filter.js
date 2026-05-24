@@ -65,10 +65,13 @@ async function callpe() {
             noidung.innerText = room.noiDung
             let thoigian = document.createElement("p")
             thoigian.innerText = room.createdAt;
+            let dientich = document.createElement("p");
+            dientich.innerText = room.dientich;
 
             // Tiến hành Append các thành phần vào cấu trúc Card
             card.appendChild(image);
             card.appendChild(price);
+            card.appendChild(dientich);
             card.appendChild(address);
             card.appendChild(noidung);
             card.appendChild(thoigian)
@@ -149,10 +152,20 @@ timkiem.addEventListener("keydown", async (e) => {
 
                 address.innerText =
                     room.address;
+                let batdau = document.createElement("p")
+                batdau.innerText = room.createdAt
+                let price = document.createElement("strong");
+                price.className = "d-block text-danger fs-5";
+                // Định dạng giá tiền nhìn cho chuyên nghiệp (Ví dụ: 2000000 -> 2.000.000 đ)
+                price.innerText = Number(room.price).toLocaleString('vi-VN') + " đ/tháng";
+                let dientich = document.createElement("p");
+                dientich.innerText = room.dientich;
 
                 card.appendChild(image);
+                card.appendChild(price);
+                card.appendChild(dientich);
                 card.appendChild(address);
-
+                card.appendChild(batdau)
                 tanjson.appendChild(card);
             });
 

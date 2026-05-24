@@ -77,6 +77,7 @@ public class Room_service {
             LocalDate ngaydang,
             LocalDate hethan,
             BigDecimal giatien,
+            int dientich,
             String diachi,
             String noidung, List<MultipartFile> file
     ) {
@@ -88,6 +89,7 @@ public class Room_service {
             room.setCreatedAt(ngaydang);
             room.setExpiredAt(hethan);
             room.setPrice(giatien);
+            room.setDientich(dientich);
             room.setAddress(diachi);
             room.setNoiDung(noidung);
 

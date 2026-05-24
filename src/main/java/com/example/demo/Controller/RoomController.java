@@ -33,14 +33,18 @@ public class RoomController {
             @RequestParam LocalDate ngaydang, 
             @RequestParam LocalDate hethan,
             @RequestParam BigDecimal giatien,
+            @RequestParam int dientich,
             @RequestParam String diachi,
             @RequestParam String noidung,
             @RequestParam List<MultipartFile> file) {
-    	 return room.uploadCheckfile(userId,ngaydang,hethan,giatien,diachi,noidung,file);
+    	 return room.uploadCheckfile(userId,ngaydang,hethan,giatien,dientich,diachi,noidung,file);
     }
     @GetMapping("/search")
     public List<Room> search(@RequestParam String tim){ 
-    	 return room.timkiem(tim); 
+    	 if( room.timkiem(tim)!=null) {
+    		  return room.timkiem(tim); 
+    	 }
+    	 return null;
     	 
     }
 }

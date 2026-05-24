@@ -38,8 +38,17 @@ public class Room {
     private BigDecimal price;
 
     private String address;
-
-    @Column(name = "noi_dung", length = 250)
+    @JoinColumn(name="dientich")
+    private Integer dientich;
+    
+    
+	public Integer getDientich() {
+		return dientich;
+	}
+	public void setDientich(Integer dientich) {
+		this.dientich = dientich;
+	}
+	@Column(name = "noi_dung", length = 250)
     private String noiDung;
 
     @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)

@@ -35,13 +35,14 @@ dangtin.addEventListener("click", () => {
     let diachi = document.getElementById("dia_chi").value;
     let ngayhethan = document.getElementById("ngay_het_han").value;
     let giatien = document.getElementById("gia_tien").value;
-
+    let dientich = document.getElementById("dien_tich").value;
     // Khởi tạo đối tượng FormData duy nhất (viết chuẩn chữ D viết hoa)
     let formData = new FormData();
     formData.append("userId", currentUserId);
     formData.append("ngaydang", ngaydang);
     formData.append("hethan", ngayhethan);
     formData.append("giatien", giatien);
+    formData.append("dientich", dientich);
     formData.append("diachi", diachi);
     formData.append("noidung", noidung);
 
