@@ -1,7 +1,6 @@
 let url = "http://localhost:8080/api/room/getall";
 let tanjson = document.querySelector('.call_person');
 
-// 1. Lắng nghe sự kiện DOMContentLoaded để ẩn nút đăng nhập và TỰ ĐỘNG GỌI HÀM CALLPE
 document.addEventListener("DOMContentLoaded", () => {
     let id = localStorage.getItem("userid");
     let loginBox = document.getElementById("login-box");
@@ -11,8 +10,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (id) {
         loginBox.style.display = "none";
     }
-
-    // 🔴 KÍCH HOẠT GỌI HÀM LẤY DANH SÁCH PHÒNG KHI TRANG TẢI XONG
     callpe();
 });
 
@@ -42,7 +39,6 @@ async function callpe() {
             // Mặc định nếu phòng không có ảnh nào
             image.src = "https://via.placeholder.com/350x200?text=No+Image";
 
-            // 🔴 XỬ LÝ CHỈ LẤY ĐÚNG 1 FILE ẢNH ĐẦU TIÊN
             if (room.images && room.images.length > 0) {
                 let firstImageObj = room.images[0];
 
@@ -67,7 +63,7 @@ async function callpe() {
             address.innerText = room.address;
             let noidung = document.createElement("p");
             noidung.innerText = room.noiDung
-            let thoigian = document.querySelector("p")
+            let thoigian = document.createElement("p")
             thoigian.innerText = room.createdAt;
 
             // Tiến hành Append các thành phần vào cấu trúc Card
@@ -87,6 +83,85 @@ async function callpe() {
         console.error("Lỗi khi gọi API lấy danh sách phòng trọ:", error);
     }
 }
+console.log("tim kiem hien thi")
+
+
+let timkiem = document.querySelector(".timkiem");
+
+timkiem.addEventListener("keydown", async (e) => {
+
+    if (e.key === "Enter") {
+
+        let valueSearch = timkiem.value;
+
+        let url_timkiem =
+            "http://localhost:8080/api/room/getall?tim="
+            + valueSearch;
+
+        console.log(valueSearch);
+
+        try {
+
+            let response = await fetch(url_timkiem);
+
+            let data = await response.json();
+
+            console.log(data);
+
+            tanjson.innerHTML = "";
+
+            data.forEach(room => {
+
+                let card = document.createElement("div");
+
+                card.className =
+                    "col-12 col-md-6 col-xl-4 mb-4";
+
+                let image = document.createElement("img");
+
+                image.style.width = "200px";
+                image.style.height = "200px";
+                image.style.objectFit = "cover";
+
+                if (
+                    room.images &&
+                    room.images.length > 0
+                ) {
+
+                    let firstImage =
+                        room.images[0];
+
+                    if (firstImage.image_data) {
+
+                        image.src =
+                            `data:image/jpeg;base64,
+                        ${firstImage.image_data}`;
+
+                    } else if (firstImage.image) {
+
+                        image.src =
+                            firstImage.image;
+                    }
+                }
+
+                let address =
+                    document.createElement("p");
+
+                address.innerText =
+                    room.address;
+
+                card.appendChild(image);
+                card.appendChild(address);
+
+                tanjson.appendChild(card);
+            });
+
+        } catch (error) {
+
+            console.log(error);
+        }
+    }
+});
 // let diachi = document.querySelector(".addressFilter");
 // let gia_toithieu = document.querySelector(".minPri");
 // let gia_toida = document.querySelector(".maxPri");

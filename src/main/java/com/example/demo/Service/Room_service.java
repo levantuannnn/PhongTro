@@ -122,4 +122,8 @@ public class Room_service {
         }
 
     }
+    public  List<Room> timkiem(String timkiem){
+    	  List<Room> st=roomRepository.findAll();
+    	  return st.stream().filter(x->x.getAddress().toLowerCase().contains(timkiem.toLowerCase())).toList();
+    }
 }

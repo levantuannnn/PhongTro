@@ -38,4 +38,9 @@ public class RoomController {
             @RequestParam List<MultipartFile> file) {
     	 return room.uploadCheckfile(userId,ngaydang,hethan,giatien,diachi,noidung,file);
     }
+    @GetMapping("/search")
+    public List<Room> search(@RequestParam String tim){ 
+    	 return room.timkiem(tim); 
+    	 
+    }
 }
