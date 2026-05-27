@@ -46,7 +46,6 @@ dangtin.addEventListener("click", () => {
     formData.append("diachi", diachi);
     formData.append("noidung", noidung);
 
-    // 🔴 GÔM FILE ẢNH VÀO FORMDATA NGAY TẠI ĐÂY
     if (fileanh && fileanh.files.length > 0) {
         Array.from(fileanh.files).forEach((file) => {
             // Tên key bắt buộc phải là "file" để khớp với @RequestParam List<MultipartFile> file bên Spring Boot

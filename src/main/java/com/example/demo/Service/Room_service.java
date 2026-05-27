@@ -128,11 +128,23 @@ public class Room_service {
     	  List<Room> st=roomRepository.findAll();
     	  return st.stream().filter(x->x.getAddress().toLowerCase().contains(timkiem.toLowerCase())).toList();
     }
-    public List<Room> loctim(String diachi,BigDecimal giatoithieu,BigDecimal giatoida,Integer dientoithieu,Integer dientoida){
-    	  List<Room> st=roomRepository.findAll();
-    	  return st.stream()
-    		        .filter(x -> x.getAddress().toLowerCase().contains(diachi.toLowerCase())
-    		                && x.getPrice().compareTo(giatoithieu) >= 0
-    		                && x.getPrice().compareTo(giatoida) <= 0)
-    		        .toList();    }
+    public List<Room> loctim(
+            String diachi,
+            BigDecimal giatoithieu,
+            BigDecimal giatoida,
+            Integer dientoithieu,
+            Integer dientoida) {
+
+        List<Room> st = roomRepository.findAll();
+
+        return st.stream()
+                .filter(x ->
+                        x.getAddress().toLowerCase().contains(diachi.toLowerCase())
+                        && x.getPrice().compareTo(giatoithieu) >= 0
+                        && x.getPrice().compareTo(giatoida) <= 0
+                        && x.getDientich() >= dientoithieu
+                        && x.getDientich() <= dientoida
+                )
+                .toList();
+    }
 }

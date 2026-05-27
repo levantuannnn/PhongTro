@@ -109,11 +109,15 @@ async function callpe() {
 
 // 2. Chức năng TÌM KIẾM nhanh bằng phím Enter
 let timkiem = document.querySelector(".timkiem");
+console.log("timkiem:", timkiem)
 if (timkiem) {
     timkiem.addEventListener("keydown", async (e) => {
         if (e.key === "Enter") {
+
             let valueSearch = timkiem.value.trim();
-            let url_timkiem = `http://localhost:8080/api/room/getall?tim=${encodeURIComponent(valueSearch)}`;
+
+            console.log("gia tri search:", valueSearch)
+            let url_timkiem = `http://localhost:8080/api/room/search?tim=${valueSearch}`;
 
             try {
                 let response = await fetch(url_timkiem);
