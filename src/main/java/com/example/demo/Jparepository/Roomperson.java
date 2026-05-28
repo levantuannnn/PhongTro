@@ -1,5 +1,4 @@
-package com.example.demo.Jparepository;
-
+package com.example.demo.Jparepository; 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -12,4 +11,5 @@ import com.example.demo.Model.Room;
 public interface Roomperson extends JpaRepository<Room,Integer> {
 	@Query("SELECT r FROM Room r WHERE r.address LIKE %:diachi%")
 	 List<Room> findByAddress(@Param("diachi") String diachi);
+ 
 }

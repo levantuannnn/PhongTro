@@ -131,7 +131,7 @@ if (timkiem) {
 }
 
 // 3. Chức năng LỌC nâng cao (Nhiều thuộc tính)
-let diachi = document.querySelector(".addressFilter");
+let diachi = document.querySelector("#addressFilter");
 let gia_toithieu = document.querySelector(".minPri");
 let gia_toida = document.querySelector(".maxPri");
 let dientich_toithieu = document.querySelector(".minDientich");
@@ -139,13 +139,23 @@ let dientich_toida = document.querySelector(".maxDientich");
 let locketqua = document.querySelector(".locketqua");
 
 async function applyFilter() {
-    let valDiaChi = diachi ? diachi.value : "";
-    let valMinGia = gia_toithieu ? gia_toithieu.value : "";
-    let valMaxGia = gia_toida ? gia_toida.value : "";
-    let valMinDT = dientich_toithieu ? dientich_toithieu.value : "";
-    let valMaxDT = dientich_toida ? dientich_toida.value : "";
+    let valDiaChi = diachi && diachi.value ? diachi.value.trim() : "";
+    let valMinGia = gia_toithieu && gia_toithieu.value ? gia_toithieu.value.trim() : "";
+    let valMaxGia = gia_toida && gia_toida.value ? gia_toida.value.trim() : "";
+    let valMinDT = dientich_toithieu && dientich_toithieu.value ? dientich_toithieu.value.trim() : "";
+    let valMaxDT = dientich_toida && dientich_toida.value ? dientich_toida.value.trim() : "";
 
-    let url_filter = `http://localhost:8080/api/room/loc?diachi=${encodeURIComponent(valDiaChi)}&giatoithieu=${valMinGia}&giatoida=${valMaxGia}&dientoithieu=${valMinDT}&dientoida=${valMaxDT}`;
+    // Sử dụng đối tượng này để tự động loại bỏ param trống
+    let params = new URLSearchParams();
+
+    if (valDiaChi) params.append('diachi', valDiaChi);
+    if (valMinGia) params.append('giatoithieu', valMinGia);
+    if (valMaxGia) params.append('giatoida', valMaxGia);
+    if (valMinDT) params.append('dientoithieu', valMinDT);
+    if (valMaxDT) params.append('dientoida', valMaxDT);
+
+    // URL mới sẽ chỉ chứa những ô bạn thực sự nhập
+    let url_filter = `http://localhost:8080/api/room/loc?${params.toString()}`;
 
     console.log("Đường dẫn lọc gửi đi:", url_filter);
 

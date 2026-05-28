@@ -103,8 +103,7 @@ public class Room_service {
 
                     image.setImage_data(multipartFile.getBytes());
 
-                    image.setRoom(room); // ⭐ QUAN TRỌNG
-
+                    image.setRoom(room); 
                     imageList.add(image);
                 }
             }
@@ -138,12 +137,17 @@ public class Room_service {
         List<Room> st = roomRepository.findAll();
 
         return st.stream()
-                .filter(x ->
-                        x.getAddress().toLowerCase().contains(diachi.toLowerCase())
-                        && x.getPrice().compareTo(giatoithieu) >= 0
-                        && x.getPrice().compareTo(giatoida) <= 0
-                        && x.getDientich() >= dientoithieu
-                        && x.getDientich() <= dientoida
+                .filter(x -> 
+                  
+                    (diachi == null || x.getAddress().toLowerCase().contains(diachi.toLowerCase()))
+                    
+                    // 2. Lọc giá (Kiểm tra thêm x.getPrice() != null để an toàn)
+                    && (giatoithieu == null || (x.getPrice() != null && x.getPrice().compareTo(giatoithieu) >= 0))
+                    && (giatoida == null || (x.getPrice() != null && x.getPrice().compareTo(giatoida) <= 0))
+                    
+                    // 3. Lọc diện tích: Phải check xem phòng đó trong DB có bị null diện tích không
+                    && (dientoithieu == null || (x.getDientich() != null && x.getDientich() >= dientoithieu))
+                    && (dientoida == null || (x.getDientich() != null && x.getDientich() <= dientoida))
                 )
                 .toList();
     }

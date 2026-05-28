@@ -47,8 +47,21 @@ public class RoomController {
     	 return null; 
     }
     @GetMapping("/loc")
-    public List<Room>  loctat(@RequestParam String diachi,@RequestParam BigDecimal giatoithieu, 
-    		@RequestParam BigDecimal giatoida,@RequestParam Integer dientoithieu,@RequestParam Integer dientoida){
-    	 return room.loctim(diachi, giatoithieu, giatoida, dientoithieu, dientoida);
+    public List<Room> loctim(
+            @RequestParam(required = false) String diachi,
+            @RequestParam(required = false) String giatoithieu, // Hứng bằng String để chặn chuỗi rỗng
+            @RequestParam(required = false) String giatoida,     
+            @RequestParam(required = false) String dientoithieu, 
+            @RequestParam(required = false) String dientoida) {  
+
+        // Nếu chuỗi gửi lên bị rỗng hoặc null -> Biến nó thành null xịn trong Java
+        String dc = (diachi == null || diachi.isBlank()) ? null : diachi;
+        BigDecimal giaMin = (giatoithieu == null || giatoithieu.isBlank()) ? null : new BigDecimal(giatoithieu);
+        BigDecimal giaMax = (giatoida == null || giatoida.isBlank()) ? null : new BigDecimal(giatoida);
+        Integer dtMin = (dientoithieu == null || dientoithieu.isBlank()) ? null : Integer.parseInt(dientoithieu);
+        Integer dtMax = (dientoida == null || dientoida.isBlank()) ? null : Integer.parseInt(dientoida);
+        
+        // Truyền vào Service để lọc
+        return room.loctim(dc, giaMin, giaMax, dtMin, dtMax);
     }
 }
